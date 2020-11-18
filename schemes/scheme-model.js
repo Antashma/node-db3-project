@@ -1,4 +1,5 @@
 //NOTE: 'id' is scheme id
+const { count } = require('../data/db-config');
 const db = require('../data/db-config')
 
 module.exports = {
@@ -41,8 +42,16 @@ async function findSteps(id) {
 }
 
 
-async function addStep(id, newStep) {
+async function addStep(newStep, id) {
+    try {
+        const currentSteps =  await db('steps').count('*').where({scheme_id:id}).first()
+        const nextStepNum = currentSteps['count(*)'] + 1;
 
+        const step =  await db('steps').insert({...newStep, scheme_id:id, step_number: nextStepNum})
+        return step;
+    } catch (error) {
+        throw error;
+    }
 }
 
 
