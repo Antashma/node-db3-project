@@ -19,7 +19,12 @@ async function find() {
 
 async function findById(id) {
     try {
-        return await db('schemes').where({id}).first();
+        const scheme = await db('schemes').where({id}).first();
+        if (!scheme) {
+            return Promise.resolve(null)
+        } else {
+            return scheme;
+        }
     } catch (err) {
         throw err
     } 
@@ -57,8 +62,10 @@ async function addStep(newStep, id) {
 
 async function add(newScheme) {
     try {
-        const scheme = await db('schemes').insert(newScheme);
-        return scheme;
+        const ids = await db('schemes').insert(newScheme);
+/* The above Knex code returns an array of ID's of newly created objects. We only created one obj, so this array has a length of 1. So, this variable below will hold the new scheme object that was created by using the findById method. */ 
+        const createdScheme = await findById(ids[0])
+        return createdScheme;
     } catch (error) {
         throw error;
     }
@@ -67,8 +74,9 @@ async function add(newScheme) {
 
 async function update(changes, id) {
  try {
-     const scheme = db('schemes').where({id}).update({...changes})
-     return scheme;
+     await db('schemes').where({id}).update({...changes})
+     const updatedScheme = await findById(id)
+     return updatedScheme;
  } catch (error) {
      throw error
  }
@@ -76,9 +84,14 @@ async function update(changes, id) {
 
 
 async function remove(id) {
+    const deletedScheme = await findById(id);
     try {
-        const scheme = db('schemes').where({id}).del()
-        return scheme;
+        if (findById(id)) {
+            await db('schemes').where({id}).del()
+            return deletedScheme;
+        } else {
+            return Promise.resolve(null);
+        }
     } catch (error) {
         throw error
     }
