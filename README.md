@@ -6,19 +6,19 @@
 
 Follow these steps to set up and work on your project:
 
-- [ ] Create a forked copy of this project.
-- [ ] Clone your OWN version of the repository (Not Lambda's by mistake!).
-- [ ] Create a new branch: git checkout -b `<firstName-lastName>`.
-- [ ] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly.
-- [ ] Push commits: git push -u origin `<firstName-lastName>`.
+- [x] Create a forked copy of this project.
+- [x] Clone your OWN version of the repository (Not Lambda's by mistake!).
+- [x] Create a new branch: git checkout -b `<firstName-lastName>`.
+- [x] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly.
+- [x] Push commits: git push -u origin `<firstName-lastName>`.
 
 ### Task 2: Minimum Viable Product
 
 For this project you will
 
-- write SQL statements against the `northwind.db3` database. Once you have the correct SQL Statement for each query, write it inside the _queries.sql_ file under the corresponding comment.
-- configure Knex by creating a `db-config.js` file that consumes the `knexfile.js`.
-- write the db helper methods for the `schemes` resource in `./schemes/scheme-model.js`.
+[x] write SQL statements against the `northwind.db3` database. Once you have the correct SQL Statement for each query, write it inside the _queries.sql_ file under the corresponding comment.
+[x] configure Knex by creating a `db-config.js` file that consumes the `knexfile.js`.
+[x] write the db helper methods for the `schemes` resource in `./schemes/scheme-model.js`.
 
 ### Multi Table Queries
 
@@ -33,26 +33,30 @@ Use a graphical tool like `SQLite Studio` to open `./data/northwind.db3` and exe
 
 Write helpers methods in `./schemes/scheme-model.js` that match the following specifications:
 
-- `find()`:
+#### `find()`
   - Calling find returns a promise that resolves to an array of all schemes in the database.
   - No steps are included.
-- `findById(id)`:
+
+#### `findById(id)`
   - Expects a scheme `id` as its only parameter.
   - Resolve to a _single_ scheme object.
   - On an invalid `id`, resolves to `null`, perhaps by doing `if (!schemaObject) return Promise.resolve(null)`.
-- `findSteps(id)`:
+
+#### `findSteps(id)`
   - Expects a scheme `id`.
   - Resolves to an array of all correctly ordered step for the given scheme: `[ { id: 17, scheme_name: 'Find the Holy Grail', step_number: 1, instructions: 'quest'}, { id: 18, scheme_name: 'Find the Holy Grail', step_number: 2, instructions: '...and quest'}, etc. ]`.
   - This array should include the `scheme_name` _not_ the `scheme_id`.
-- `add(scheme)`:
+
+#### `add(scheme)`
   - Expects a scheme object.
   - Inserts scheme into the database.
   - Resolves to the newly inserted scheme, including `id`.
-- `update(changes, id)`:
+#### `update(changes, id)`
   - Expects a changes object and an `id`.
   - Updates the scheme with the given id.
   - Resolves to the newly updated scheme object.
-- `remove(id)`:
+
+#### `remove(id)`
   - Removes the scheme object with the provided id.
   - Resolves to the removed scheme
   - Resolves to `null` on an invalid id.
@@ -98,4 +102,4 @@ The following endpoints are available to test the functionality of the model met
 
 Follow these steps for completing your project.
 
-- [ ] Submit a pull request to merge `<firstName-lastName>` Branch into master (student's Repo). **Please don't merge your own pull request**
+- [x] Submit a pull request to merge `<firstName-lastName>` Branch into master (student's Repo). **Please don't merge your own pull request**
