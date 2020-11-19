@@ -65,8 +65,14 @@ async function add(newScheme) {
 }
 
 
-async function update(id, changes) {
-
+async function update(changes, id) {
+    console.log(changes)
+ try {
+     const scheme = db('schemes').where({id}).update({...changes})
+     return scheme;
+ } catch (error) {
+     throw error
+ }
 }
 
 
