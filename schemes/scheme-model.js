@@ -56,7 +56,12 @@ async function addStep(newStep, id) {
 
 
 async function add(newScheme) {
-
+    try {
+        const scheme = await db('schemes').insert(newScheme);
+        return scheme;
+    } catch (error) {
+        throw error;
+    }
 }
 
 
